@@ -1,5 +1,6 @@
 import javax.swing.JPanel;
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Color;
 
 public class Canvas extends JPanel {
 
@@ -13,5 +14,11 @@ public class Canvas extends JPanel {
     }
     public void paint(Graphics g)    {
         super.paint(g);
+    }
+    public void drawDesktop(Graphics g){
+
+    }
+    public void drawError(Graphics g){
+
     }
 }

@@ -47,7 +47,8 @@ public class Controller implements KeyListener , MouseListener , MouseWheelListe
     }
 
     public void mouseClicked(MouseEvent e) {
-
+        int x = e.getX();
+        int y = e.getY();
     }
 
     public void mousePressed(MouseEvent e) {
@@ -55,7 +56,8 @@ public class Controller implements KeyListener , MouseListener , MouseWheelListe
     }
 
     public void mouseReleased(MouseEvent e) {
-
+        int x = e.getX();
+        int y = e.getY();
     }
 
     public void mouseEntered(MouseEvent e) {
