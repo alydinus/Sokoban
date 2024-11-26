@@ -1,16 +1,28 @@
-import javax.swing.JFrame;
+import javax.swing.*;
 
 public class Viewer {
+    private Canvas canvas;
 
     public Viewer() {
         Controller controller = new Controller(this);
         Model model = controller.getModel();
-        Canvas canvas = new Canvas(model);
+         canvas = new Canvas(model);
 
-        JFrame frame = new JFrame("Sokaban Game MVC Pattern");
-        frame.setSize(800, 800);
-        frame.setLocation(300, 200);
-        frame.setVisible(true);
+        JFrame frame = new JFrame("Sokoban Game MVC Pattern");
+        frame.setSize(900, 700);
+        frame.setLocation(200, 100);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add("Center", canvas);
+        frame.addKeyListener(controller);
+        frame.addMouseWheelListener(controller);
+        frame.addMouseListener(controller);
+        frame.setVisible(true);
+    }
+    public void update() {
+        canvas.repaint();
+    }
+
+    public void showWonDialog() {
+        JOptionPane.showMessageDialog(null, "Congratulations , you have successfully passed the level!!!");
     }
 }
