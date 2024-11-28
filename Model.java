@@ -1,4 +1,4 @@
-import java.awt.*;
+
 
 public class Model {
     private Node startNode;
@@ -6,7 +6,7 @@ public class Model {
     private Node[] goals;
     private Viewer viewer;
     private Node player;
-    private GameModel desktop;
+    private Graph desktop;
     private boolean stateDesktop;
     private Levels levels;
     public Model(Viewer viewer) {
@@ -35,7 +35,7 @@ public class Model {
             stateDesktop = false;
             return;
         }
-        desktop = new GameModel(level);
+        desktop = new Graph(level);
         if (desktop.getStartNode() == null || desktop == null) {
             stateDesktop = false;
             System.err.println("Error: startNode is null. Graph was not built correctly.");
@@ -126,7 +126,7 @@ public class Model {
         }
         viewer.update();
     }
-    public GameModel getDesktop() {
+    public Graph getDesktop() {
         return desktop;
     }
     private void moveUp() {

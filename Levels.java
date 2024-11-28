@@ -4,7 +4,7 @@ import java.io.IOException;
 public class Levels {
     private int level;
     public Levels() {
-        level = 5;
+        level = 1;
     }
     public String nextLevel() {
         String currentLevel = null;

@@ -1,18 +1,15 @@
-import java.awt.Graphics;
 
-public class GameModel {
+public class Graph {
     private Node startNode; // Начальный узел (верхний левый угол карты)
     private String level;
     private int columns;
     private int rows;
 
-    public GameModel(String level) {
+    public Graph(String level) {
         this.level = level;
         columns = countColumns();
         rows = level.length() / columns;
-        if (!isLevelValid(level)) {
-            throw new IllegalArgumentException("Level is invalid: rows are not of equal length.");
-        }
+
         buildGraph();
     }
     private int countColumns() {
@@ -24,16 +21,6 @@ public class GameModel {
             counter++;
         }
         return counter;
-    }
-    private boolean isLevelValid(String level) {
-        String[] lines = level.split("\n");
-        int expectedLength = lines[0].length();
-        for (String line : lines) {
-            if (line.length() != expectedLength) {
-                return false;
-            }
-        }
-        return true;
     }
     // Построение графа
     private void buildGraph() {

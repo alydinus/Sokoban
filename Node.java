@@ -1,7 +1,3 @@
-import java.awt.Color;
-import java.awt.Graphics;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Node {
     private String type; // Тип узла: "Floor", "Wall", "Player", "Box", "Target"

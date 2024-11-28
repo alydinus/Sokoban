@@ -5,7 +5,7 @@ import java.awt.Color;
 public class Canvas extends JPanel {
 
     private Model model;
-    private GameModel graph;
+    private Graph graph;
 
     public Canvas(Model model) {
 
@@ -29,7 +29,7 @@ public class Canvas extends JPanel {
         int width = 50;
         int height = 50;
 
-        GameModel desktop = model.getDesktop();
+        Graph desktop = model.getDesktop();
         Node currentNode = desktop.getStartNode();
         Node newLineNode = desktop.getStartNode().getDown();
         while (true){
