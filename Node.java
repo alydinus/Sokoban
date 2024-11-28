@@ -4,20 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Node {
-    private String type; // Тип узла: "Space", "Wall", "Player", "Box", "Target"
+    private String type; // Тип узла: "Floor", "Wall", "Player", "Box", "Target"
     private int x, y;    // Логические координаты узла
     private Node up, down, left, right; // Ссылки на соседей
-
-    // Цвета для каждого типа узла
-    private static final Map<String, Color> colorMap = new HashMap<>();
-    static {
-        colorMap.put("Space", Color.LIGHT_GRAY);
-        colorMap.put("Wall", Color.DARK_GRAY);
-        colorMap.put("Player", Color.BLUE);
-        colorMap.put("Box", Color.ORANGE);
-        colorMap.put("Target", Color.GREEN);
-    }
-
     public Node(String type, int x, int y) {
         this.type = type;
         this.x = x;
@@ -70,20 +59,5 @@ public class Node {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    // Отрисовка узла
-    public void render(Graphics g, int tileSize, int offsetX, int offsetY) {
-        int drawX = offsetX + x * tileSize;
-        int drawY = offsetY + y * tileSize;
-
-        // Устанавливаем цвет в зависимости от типа узла
-        Color color = colorMap.getOrDefault(type, Color.BLACK);
-        g.setColor(color);
-        g.fillRect(drawX, drawY, tileSize, tileSize);
-
-        // Рисуем границу узла кароч это внешние
-        g.setColor(Color.BLACK);
-        g.drawRect(drawX, drawY, tileSize, tileSize);
     }
 }
