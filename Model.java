@@ -1,6 +1,7 @@
 
 
 public class Model {
+
     private Node startNode;
     private Node newLine;
     private Node[] goals;
@@ -9,6 +10,7 @@ public class Model {
     private Graph desktop;
     private boolean stateDesktop;
     private Levels levels;
+
     public Model(Viewer viewer) {
         this.viewer = viewer;
         levels = new Levels();
@@ -17,10 +19,12 @@ public class Model {
 
     private void initialization() {
         String level = levels.nextLevel();
+
         int playerNumber = 0;
         int boxesNumber = 0;
         int goalsNumber = 0;
         char element;
+
         for (int i = 0; i < level.length(); i++) {
             element = level.charAt(i);
             if (element == '2') {
@@ -31,16 +35,19 @@ public class Model {
                 goalsNumber = goalsNumber + 1;
             }
         }
+
         if ((playerNumber != 1) || (boxesNumber == 0) || (goalsNumber == 0) || (boxesNumber != goalsNumber)) {
             stateDesktop = false;
             return;
         }
+
         desktop = new Graph(level);
         if (desktop.getStartNode() == null || desktop == null) {
             stateDesktop = false;
             System.err.println("Error: startNode is null. Graph was not built correctly.");
             return;
         }
+
         startNode = desktop.getStartNode();
         System.out.println("Start node: " + startNode.getType());
         player = getPlayer();
@@ -74,6 +81,7 @@ public class Model {
     public boolean getState() {
         return stateDesktop;
     }
+
     public Node getPlayer() {
         System.out.println("Graph structure:");
         Node row = startNode;
@@ -126,9 +134,11 @@ public class Model {
         }
         viewer.update();
     }
+
     public Graph getDesktop() {
         return desktop;
     }
+
     private void moveUp() {
         Node upNode = player.getUp();
         if (upNode == null) {
@@ -149,6 +159,7 @@ public class Model {
         player = upNode;
         player.setType("Player");
     }
+
     private void moveDown() {
         Node downNode = player.getDown();
         if (downNode == null) {
@@ -169,6 +180,7 @@ public class Model {
         player = downNode;
         player.setType("Player");
     }
+
     private void moveLeft() {
         Node leftNode = player.getLeft();
         if (leftNode == null) {
@@ -189,6 +201,7 @@ public class Model {
         player = leftNode;
         player.setType("Player");
     }
+
     private void moveRight() {
         Node rightNode = player.getRight();
         if (rightNode == null) {

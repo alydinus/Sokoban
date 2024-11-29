@@ -1,12 +1,13 @@
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
 public class Viewer {
     private Canvas canvas;
 
     public Viewer() {
         Controller controller = new Controller(this);
         Model model = controller.getModel();
-         canvas = new Canvas(model);
+        canvas = new Canvas(model);
         JFrame frame = new JFrame("Sokoban Game MVC Pattern");
         frame.setSize(900, 700);
         frame.setLocation(200, 100);
