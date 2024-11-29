@@ -141,85 +141,101 @@ public class Model {
 
     private void moveUp() {
         Node upNode = player.getUp();
-        if (upNode == null) {
+        if (upNode == null || upNode.getType().equals("Wall")) {
             return;
         }
-        if (upNode.getType().equals("Wall")) {
-            return;
-        }
-        if (upNode.getType().equals("Box")) {
+        if (upNode.getType().equals("Box") || upNode.getType().equals("BoxOnGoal")) {
             Node upBoxNode = upNode.getUp();
-            if (upBoxNode == null || upBoxNode.getType().equals("Wall") || upBoxNode.getType().equals("Box")) {
+            if (upBoxNode == null || upBoxNode.getType().equals("Wall") ||
+                    upBoxNode.getType().equals("Box") || upBoxNode.getType().equals("BoxOnGoal")) {
                 return;
             }
-            upNode.setType("Floor");
-            upBoxNode.setType("Box");
+            processBoxMove(upNode, upBoxNode);
         }
-        player.setType("Floor");
+
+        processPlayerMove(player, upNode);
         player = upNode;
-        player.setType("Player");
     }
 
     private void moveDown() {
         Node downNode = player.getDown();
-        if (downNode == null) {
+        if (downNode == null || downNode.getType().equals("Wall")) {
             return;
         }
-        if (downNode.getType().equals("Wall")) {
-            return;
-        }
-        if (downNode.getType().equals("Box")) {
+        if (downNode.getType().equals("Box") || downNode.getType().equals("BoxOnGoal")) {
             Node downBoxNode = downNode.getDown();
-            if (downBoxNode == null || downBoxNode.getType().equals("Wall") || downBoxNode.getType().equals("Box")) {
+            if (downBoxNode == null || downBoxNode.getType().equals("Wall") ||
+                    downBoxNode.getType().equals("Box") || downBoxNode.getType().equals("BoxOnGoal")) {
                 return;
             }
-            downNode.setType("Floor");
-            downBoxNode.setType("Box");
+            processBoxMove(downNode, downBoxNode);
         }
-        player.setType("Floor");
+
+        processPlayerMove(player, downNode);
         player = downNode;
-        player.setType("Player");
     }
 
     private void moveLeft() {
         Node leftNode = player.getLeft();
-        if (leftNode == null) {
+        if (leftNode == null || leftNode.getType().equals("Wall")) {
             return;
         }
-        if (leftNode.getType().equals("Wall")) {
-            return;
-        }
-        if (leftNode.getType().equals("Box")) {
+        if (leftNode.getType().equals("Box") || leftNode.getType().equals("BoxOnGoal")) {
             Node leftBoxNode = leftNode.getLeft();
-            if (leftBoxNode == null || leftBoxNode.getType().equals("Wall") || leftBoxNode.getType().equals("Box")) {
+            if (leftBoxNode == null || leftBoxNode.getType().equals("Wall") ||
+                    leftBoxNode.getType().equals("Box") || leftBoxNode.getType().equals("BoxOnGoal")) {
                 return;
             }
-            leftNode.setType("Floor");
-            leftBoxNode.setType("Box");
+            processBoxMove(leftNode, leftBoxNode);
         }
-        player.setType("Floor");
+
+        processPlayerMove(player, leftNode);
         player = leftNode;
-        player.setType("Player");
     }
 
     private void moveRight() {
         Node rightNode = player.getRight();
-        if (rightNode == null) {
+        if (rightNode == null || rightNode.getType().equals("Wall")) {
             return;
         }
-        if (rightNode.getType().equals("Wall")) {
-            return;
-        }
-        if (rightNode.getType().equals("Box")) {
+        if (rightNode.getType().equals("Box") || rightNode.getType().equals("BoxOnGoal")) {
             Node rightBoxNode = rightNode.getRight();
-            if (rightBoxNode == null || rightBoxNode.getType().equals("Wall") || rightBoxNode.getType().equals("Box")) {
+            if (rightBoxNode == null || rightBoxNode.getType().equals("Wall") ||
+                    rightBoxNode.getType().equals("Box") || rightBoxNode.getType().equals("BoxOnGoal")) {
                 return;
             }
-            rightNode.setType("Floor");
-            rightBoxNode.setType("Box");
+            processBoxMove(rightNode, rightBoxNode);
         }
-        player.setType("Floor");
+
+        processPlayerMove(player, rightNode);
         player = rightNode;
-        player.setType("Player");
+    }
+
+    private void processBoxMove(Node boxNode, Node targetNode) {
+        if (boxNode.getType().equals("BoxOnGoal")) {
+            boxNode.setType("Goal");
+        } else {
+            boxNode.setType("Floor");
+        }
+
+        if (targetNode.getType().equals("Goal")) {
+            targetNode.setType("BoxOnGoal");
+        } else {
+            targetNode.setType("Box");
+        }
+    }
+
+    private void processPlayerMove(Node playerNode, Node targetNode) {
+        if (playerNode.getType().equals("PlayerOnGoal")) {
+            playerNode.setType("Goal");
+        } else {
+            playerNode.setType("Floor");
+        }
+
+        if (targetNode.getType().equals("Goal")) {
+            targetNode.setType("PlayerOnGoal");
+        } else {
+            targetNode.setType("Player");
+        }
     }
 }

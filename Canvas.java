@@ -44,7 +44,11 @@ public class Canvas extends JPanel {
                 drawGoalCell(g,x,y,width,height);
             } else if (currentNode.getType().equals("Floor")){
                 drawFloorCell(g,x,y,width,height);
-            }else{
+            } else if (currentNode.getType().equals("PlayerOnGoal")){
+                drawPlayerCell(g,x,y,width,height);
+            } else if (currentNode.getType().equals("BoxOnGoal")){
+                drawBoxCell(g,x,y,width,height);
+            } else{
                 drawDefaultCell(g,x,y,width,height);
             }
             if (currentNode.getRight() == null && currentNode.getDown() == null){
