@@ -137,7 +137,14 @@ public class Model {
         if (upNode.getType().equals("Wall")) {
             return;
         }
-
+        if (upNode.getType().equals("Box")) {
+            Node upBoxNode = upNode.getUp();
+            if (upBoxNode == null || upBoxNode.getType().equals("Wall") || upBoxNode.getType().equals("Box")) {
+                return;
+            }
+            upNode.setType("Floor");
+            upBoxNode.setType("Box");
+        }
         player.setType("Floor");
         player = upNode;
         player.setType("Player");
@@ -150,7 +157,14 @@ public class Model {
         if (downNode.getType().equals("Wall")) {
             return;
         }
-
+        if (downNode.getType().equals("Box")) {
+            Node downBoxNode = downNode.getDown();
+            if (downBoxNode == null || downBoxNode.getType().equals("Wall") || downBoxNode.getType().equals("Box")) {
+                return;
+            }
+            downNode.setType("Floor");
+            downBoxNode.setType("Box");
+        }
         player.setType("Floor");
         player = downNode;
         player.setType("Player");
@@ -163,7 +177,14 @@ public class Model {
         if (leftNode.getType().equals("Wall")) {
             return;
         }
-
+        if (leftNode.getType().equals("Box")) {
+            Node leftBoxNode = leftNode.getLeft();
+            if (leftBoxNode == null || leftBoxNode.getType().equals("Wall") || leftBoxNode.getType().equals("Box")) {
+                return;
+            }
+            leftNode.setType("Floor");
+            leftBoxNode.setType("Box");
+        }
         player.setType("Floor");
         player = leftNode;
         player.setType("Player");
@@ -176,7 +197,14 @@ public class Model {
         if (rightNode.getType().equals("Wall")) {
             return;
         }
-
+        if (rightNode.getType().equals("Box")) {
+            Node rightBoxNode = rightNode.getRight();
+            if (rightBoxNode == null || rightBoxNode.getType().equals("Wall") || rightBoxNode.getType().equals("Box")) {
+                return;
+            }
+            rightNode.setType("Floor");
+            rightBoxNode.setType("Box");
+        }
         player.setType("Floor");
         player = rightNode;
         player.setType("Player");
