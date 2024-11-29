@@ -1,7 +1,5 @@
 import javax.swing.JPanel;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.geom.Path2D;
 import java.awt.Color;
 
 public class Canvas extends JPanel {
@@ -138,9 +136,6 @@ public class Canvas extends JPanel {
         }
     }
 
-
-
-
     private void drawBoxCell(Graphics g, int x, int y, int width, int height) {
 
         g.setColor(Color.ORANGE);
@@ -155,8 +150,6 @@ public class Canvas extends JPanel {
         g.drawLine(x, y, x + width - 1, y + height - 1);
         g.drawLine(x + width - 1, y, x, y + height - 1);
     }
-
-
 
     private void drawGoalCell(Graphics g, int x, int y, int width, int height) {
         g.setColor(Color.LIGHT_GRAY);
@@ -177,6 +170,7 @@ public class Canvas extends JPanel {
         g.setColor(Color.YELLOW);
         g.fillRect(x, y, width, height);
     }
+
 
     public void drawError(Graphics g){
 
