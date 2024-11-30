@@ -203,15 +203,4 @@ public class Model {
     public boolean getState() {
         return false;
     }
-
-    // printing to console for testing
-    public void printDesktop() {
-        for (int i = 0; i < desktop.length; i++) {
-            for (int j = 0; j < desktop[i].length; j++) {
-                System.out.print(desktop[i][j] + " ");
-            }
-            System.out.println();
-        }
-        System.out.println();
-    }
 }
