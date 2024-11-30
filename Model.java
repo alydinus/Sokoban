@@ -74,14 +74,34 @@ public class Model {
         }
         viewer.update();
         checkGoal();
-        win();
+        won();
     }
 
-    private void win() {
+    private void won() {
+        boolean flag = true;
+        for (int z = 0; z < arrayIndexes[0].length; z++) {
+            int i = arrayIndexes[0][z];
+            int j = arrayIndexes[1][z];
+            if (desktop[i][j] != 3) {
+                flag = false;
+                break;
+            }
+        }
+        if (flag) {
+            viewer.showWonDialog();
+            initialization();
+            viewer.update();
+        }
     }
 
     private void checkGoal() {
-        
+        for (int t = 0; t < arrayIndexes[0].length; t++) {
+            int i = arrayIndexes[0][t];
+            int j = arrayIndexes[1][t];
+            if (desktop[i][j] == 0) {
+                desktop[i][j] = 4;
+            }
+        }
     }
 
     private void moveDown() {
