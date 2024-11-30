@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 
@@ -22,12 +21,18 @@ public class Levels {
                 array = getThirdLevel();
                 break;
             case 4:
-                array = getFourthLevel();
+                array = getThirdLevel();
                 break;
             case 5:
-                array = getLevelFromFile("levels/level5.sok");
+                array = getFourthLevel();
                 break;
             case 6:
+                array = getLevelFromFile("levels/level5.sok");
+                break;
+            case 7:
+                array = getLevelFromFile("levels/level5.sok");
+                break;
+            case 8:
                 array = getLevelFromFile("levels/level6.sok");
                 break;
 
@@ -75,6 +80,7 @@ public class Levels {
                 {2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
         };
     }
+
     private int[][] getFourthLevel() {
         return new int[][]{
                 {2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
@@ -118,7 +124,7 @@ public class Levels {
                 System.out.println("ioe" + ioe);
             }
         }
-        int [][] array = null;
+        int[][] array = null;
         if (container != null) {
             array = convertToArray(container);
             System.out.println(array);
@@ -134,7 +140,7 @@ public class Levels {
             if (element == '\n') {
                 countArray = countArray + 1;
             }
-            if(i == container.length() -1){
+            if (i == container.length() - 1) {
                 countArray = countArray + 1;
             }
         }
@@ -150,7 +156,7 @@ public class Levels {
                 continue;
             }
             a = a + 1;
-            if(i == container.length() -1){
+            if (i == container.length() - 1) {
                 array[b] = new int[a];
             }
         }
@@ -189,5 +195,3 @@ public class Levels {
         return level;
     }
 }
-
-
