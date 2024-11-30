@@ -72,8 +72,8 @@ public class Model {
             default:
                 break;
         }
-        viewer.update();
         checkGoal();
+        viewer.update();
         won();
     }
 
@@ -106,64 +106,96 @@ public class Model {
 
     private void moveLeft() {
         if (indexY > 0) {
-            if (desktop[indexX][indexY - 1] == 0) {
-                desktop[indexX][indexY] = 0;
-                indexY--;
+            if (desktop[indexX][indexY - 1] == 0 || desktop[indexX][indexY - 1] == 4) {
+                if (desktop[indexX][indexY] == 4) {
+                    desktop[indexX][indexY] = 4;
+                } else {
+                    desktop[indexX][indexY] = 0;
+                }
+                indexY = indexY - 1;
                 desktop[indexX][indexY] = 1;
             } else if (desktop[indexX][indexY - 1] == 3 && indexY > 1 &&
                     (desktop[indexX][indexY - 2] == 0 || desktop[indexX][indexY - 2] == 4)) {
-                desktop[indexX][indexY] = 0;
+                if (desktop[indexX][indexY] == 4) {
+                    desktop[indexX][indexY] = 4;
+                } else {
+                    desktop[indexX][indexY] = 0;
+                }
                 desktop[indexX][indexY - 1] = 1;
                 desktop[indexX][indexY - 2] = 3;
-                indexY--;
+                indexY = indexY - 1;
             }
         }
     }
 
     private void moveRight() {
         if (indexY < desktop[indexX].length - 1) {
-            if (desktop[indexX][indexY + 1] == 0) {
-                desktop[indexX][indexY] = 0;
-                indexY++;
+            if (desktop[indexX][indexY + 1] == 0 || desktop[indexX][indexY + 1] == 4) {
+                if (desktop[indexX][indexY] == 4) {
+                    desktop[indexX][indexY] = 4;
+                } else {
+                    desktop[indexX][indexY] = 0;
+                }
+                indexY = indexY + 1;
                 desktop[indexX][indexY] = 1;
             } else if (desktop[indexX][indexY + 1] == 3 && indexY < desktop[indexX].length - 2 &&
                     (desktop[indexX][indexY + 2] == 0 || desktop[indexX][indexY + 2] == 4)) {
-                desktop[indexX][indexY] = 0;
+                if (desktop[indexX][indexY] == 4) {
+                    desktop[indexX][indexY] = 4;
+                } else {
+                    desktop[indexX][indexY] = 0;
+                }
                 desktop[indexX][indexY + 1] = 1;
                 desktop[indexX][indexY + 2] = 3;
-                indexY++;
+                indexY = indexY + 1;
             }
         }
     }
 
     private void moveDown() {
         if (indexX < desktop.length - 1) {
-            if (desktop[indexX + 1][indexY] == 0) {
-                desktop[indexX][indexY] = 0;
-                indexX++;
+            if (desktop[indexX + 1][indexY] == 0 || desktop[indexX + 1][indexY] == 4) {
+                if (desktop[indexX][indexY] == 4) {
+                    desktop[indexX][indexY] = 4;
+                } else {
+                    desktop[indexX][indexY] = 0;
+                }
+                indexX = indexX + 1;
                 desktop[indexX][indexY] = 1;
             } else if (desktop[indexX + 1][indexY] == 3 && indexX < desktop.length - 2 &&
                     (desktop[indexX + 2][indexY] == 0 || desktop[indexX + 2][indexY] == 4)) {
-                desktop[indexX][indexY] = 0;
+                if (desktop[indexX][indexY] == 4) {
+                    desktop[indexX][indexY] = 4;
+                } else {
+                    desktop[indexX][indexY] = 0;
+                }
                 desktop[indexX + 1][indexY] = 1;
                 desktop[indexX + 2][indexY] = 3;
-                indexX++;
+                indexX = indexX + 1;
             }
         }
     }
 
     private void moveUp() {
         if (indexX > 0) {
-            if (desktop[indexX - 1][indexY] == 0) {
-                desktop[indexX][indexY] = 0;
-                indexX--;
+            if (desktop[indexX - 1][indexY] == 0 || desktop[indexX - 1][indexY] == 4) {
+                if (desktop[indexX][indexY] == 4) {
+                    desktop[indexX][indexY] = 4;
+                } else {
+                    desktop[indexX][indexY] = 0;
+                }
+                indexX = indexX - 1;
                 desktop[indexX][indexY] = 1;
             } else if (desktop[indexX - 1][indexY] == 3 && indexX > 1 &&
                     (desktop[indexX - 2][indexY] == 0 || desktop[indexX - 2][indexY] == 4)) {
-                desktop[indexX][indexY] = 0;
+                if (desktop[indexX][indexY] == 4) {
+                    desktop[indexX][indexY] = 4;
+                } else {
+                    desktop[indexX][indexY] = 0;
+                }
                 desktop[indexX - 1][indexY] = 1;
                 desktop[indexX - 2][indexY] = 3;
-                indexX--;
+                indexX = indexX - 1;
             }
         }
     }
