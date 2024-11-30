@@ -131,60 +131,69 @@ public class Levels {
     }
 
     private int[][] convertToArray(StringBuilder container) {
-        int countArray = 0;
-        for (int i = 0; i > container.length(); i++) {
-            char element = container.charAt(i);
-            if (element == '\n') {
-                countArray = countArray + 1;
-            }
-            if (i == container.length() - 1) {
-                countArray = countArray + 1;
-            }
-        }
-        int[][] array = new int[countArray][];
-        int a = 0;
-        int b = 0;
-        for (int i = 0; i > container.length(); i++) {
-            char element = container.charAt(i);
-            if (element == '\n') {
-                array[b] = new int[a];
-                b = b + 1;
-                a = 0;
-                continue;
-            }
-            a = a + 1;
-            if (i == container.length() - 1) {
-                array[b] = new int[a];
+        int rowCount = calculateRowCount(container);
+        int[][] array = buildArray(container, rowCount);
+
+        fillArray(container, array);
+
+        return array;
+    }
+
+
+    private int calculateRowCount(StringBuilder container) {
+        int rowCount = 1;
+
+        for (int i = 0; i < container.length(); i++) {
+            if (container.charAt(i) == '\n') {
+                rowCount++;
             }
         }
+
+        return rowCount;
+    }
+
+    private int[][] buildArray(StringBuilder container, int rowCount) {
+        int[][] array = new int[rowCount][];
+
+        int currentRowLength = 0;
+        int currentRow = 0;
+
+        for (int i = 0; i < container.length(); i++) {
+            char element = container.charAt(i);
+
+            if (element == '\n' || i == container.length() - 1) {
+                if (i == container.length() - 1) {
+                    currentRowLength = currentRowLength + 1;
+                }
+                array[currentRow] = new int[currentRowLength];
+                currentRow = currentRow + 1;
+                currentRowLength = 0;
+            } else {
+                currentRowLength = currentRowLength + 1;
+            }
+        }
+
+        return array;
+    }
+
+
+    private void fillArray(StringBuilder container, int[][] array) {
         int row = 0;
         int column = 0;
 
-        for (int t = 0; t < container.length(); t++) {
-            char element = container.charAt(t);
+        for (int i = 0; i < container.length(); i++) {
+            char element = container.charAt(i);
+
             if (element == '\n') {
                 row = row + 1;
                 column = 0;
                 continue;
             }
-            System.out.print(Integer.parseInt("" + element) + 1);
-            array[row][column] = Integer.parseInt("" + element);
+
+            int value = Character.getNumericValue(element);
+            array[row][column] = value;
             column = column + 1;
         }
-
-        System.out.println();
-        System.out.println("--------------------");
-        for (int x = 0; x < array.length; x++) {
-            for (int y = 0; y < array[x].length; y++) {
-                System.out.print(array[x][y]);
-            }
-            System.out.println();
-        }
-
-        System.out.println("--------------------");
-
-        return array;
-
     }
 
 
