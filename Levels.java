@@ -1,3 +1,6 @@
+import java.io.FileInputStream;
+import java.io.IOException;
+
 public class Levels {
     private int level;
 
@@ -17,7 +20,7 @@ public class Levels {
                 array = getThirdLevel();
                 break;
             case 4:
-//                array = getLevelFromFile("levels/level5.sok");
+                array = getLevelFromFile("levels/level5.sok");
                 break;
             case 5:
 //                array = getLevelFromFile("levels/level6.sok");
@@ -67,4 +70,107 @@ public class Levels {
     public int getLevelNumber(){
         return level;
     }
+
+    private int[][] getLevelFromFile(String fileName) {
+        FileInputStream in = null;
+
+        StringBuilder container = null;
+
+        try{
+
+            in = new FileInputStream(fileName);
+            container = new StringBuilder();
+
+            int unicode;
+            while ((unicode = in.read()) != -1){
+                char symbol = (char) unicode;
+                if(('0' <= symbol && symbol <= '4') || (symbol == '\n')) {
+                    container.append(symbol);
+                }
+            }
+        } catch(IOException ioe){
+            System.out.println("ioe " + ioe);
+            container = null;
+        } finally {
+            try{
+                if(in != null){
+                    in.close();
+                }
+            } catch(IOException ioe){
+                System.out.println("ioe " + ioe);
+            }
+        }
+
+        int [][] array = null;
+        if(container != null){
+            array = convertToArray(container);
+        }
+
+        return array;
+    }
+
+    private int[][] convertToArray(StringBuilder container) {
+        int rowCount = calculateRowCount(container);
+        int[][] array = buildArray(container, rowCount);
+
+        fillArray(container, array);
+
+        return array;
+    }
+
+    private int calculateRowCount(StringBuilder container) {
+        int rowCount = 1;
+
+        for (int i = 0; i < container.length(); i++) {
+            if (container.charAt(i) == '\n') {
+                rowCount++;
+            }
+        }
+
+        return rowCount;
+    }
+
+    private int[][] buildArray(StringBuilder container, int rowCount) {
+        int[][] array = new int[rowCount][];
+
+        int currentRowLength = 0;
+        int currentRow = 0;
+
+        for (int i = 0; i < container.length(); i++) {
+            char element = container.charAt(i);
+
+            if (element == '\n' || i == container.length() - 1) {
+                if (i == container.length() - 1) {
+                    currentRowLength = currentRowLength + 1;
+                }
+                array[currentRow] = new int[currentRowLength];
+                currentRow = currentRow + 1;
+                currentRowLength = 0;
+            } else {
+                currentRowLength = currentRowLength + 1;
+            }
+        }
+
+        return array;
+    }
+
+    private void fillArray(StringBuilder container, int[][] array) {
+        int row = 0;
+        int column = 0;
+
+        for (int i = 0; i < container.length(); i++) {
+            char element = container.charAt(i);
+
+            if (element == '\n') {
+                row = row + 1;
+                column = 0;
+                continue;
+            }
+
+            int value = Character.getNumericValue(element);
+            array[row][column] = value;
+            column = column + 1;
+        }
+    }
+
 }
