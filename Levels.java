@@ -21,19 +21,16 @@ public class Levels {
                 array = getThirdLevel();
                 break;
             case 4:
-                array = getThirdLevel();
-                break;
-            case 5:
                 array = getFourthLevel();
                 break;
-            case 6:
+            case 5:
                 array = getLevelFromFile("levels/level5.sok");
+                break;
+            case 6:
+                array = getLevelFromFile("levels/level6.sok");
                 break;
             case 7:
-                array = getLevelFromFile("levels/level5.sok");
-                break;
-            case 8:
-                array = getLevelFromFile("levels/level6.sok");
+                array = getLevelFromFile("levels/level7.sok");
                 break;
 
             default:
