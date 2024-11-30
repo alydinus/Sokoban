@@ -3,10 +3,11 @@ import javax.swing.JOptionPane;
 
 public class Viewer {
     private Canvas canvas;
+    private Model model;
 
     public Viewer() {
         Controller controller = new Controller(this);
-        Model model = controller.getModel();
+        this.model = controller.getModel();
         canvas = new Canvas(model);
         JFrame frame = new JFrame("Sokoban Game MVC Pattern");
         frame.setSize(900, 700);
@@ -19,7 +20,9 @@ public class Viewer {
         frame.setVisible(true);
     }
     public void update() {
-        canvas.repaint();
+//        canvas.repaint();
+        System.out.println("Текущее состояние поля:");
+        model.printDesktop(); // Используем сохранённый Model
     }
 
     public void showWonDialog() {
