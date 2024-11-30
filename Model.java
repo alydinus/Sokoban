@@ -121,7 +121,7 @@ public class Model {
 
     private void moveRight() {
         if (desktop[indexX][indexY + 1] == 3) {
-            if (desktop[indexX][indexY + 2] == 0 || desktop[indexX + 2][indexY] == 4) {
+            if (desktop[indexX][indexY + 2] == 0 || desktop[indexX][indexY + 2] == 4) {
                 desktop[indexX][indexY + 1] = 0;
                 desktop[indexX][indexY + 2] = 3;
             }
