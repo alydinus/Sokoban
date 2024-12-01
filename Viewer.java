@@ -1,48 +1,68 @@
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import java.awt.CardLayout;
+import java.awt.Image;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class Viewer {
     private Canvas canvas;
     private CardLayout cardLayout;
     private LevelChooser levelChooser;
     private JFrame frame;
+    private JPanel mainPanel;
+
     public Viewer() {
+
         Controller controller = new Controller(this);
         Model model = controller.getModel();
-        canvas = new Canvas(model , controller);
+
+        canvas = new Canvas(model, controller);
         cardLayout = new CardLayout();
         levelChooser = new LevelChooser(this, model);
+
+        mainPanel = new JPanel(cardLayout);
+
+        MenuPanel menuPanel = new MenuPanel(cardLayout, mainPanel);
+
+        mainPanel.add(menuPanel, "Menu");
+        mainPanel.add(levelChooser, "LevelChooser");
+        mainPanel.add(canvas, "Game");
+        Image backgroundImage = new ImageIcon("images/background.jpg").getImage();
+
         frame = new JFrame("Sokoban Game MVC Pattern");
         frame.setSize(1200, 800);
-        frame.setLocation(170,20);
+        frame.setLocation(170, 20);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(cardLayout);
+        frame.add(mainPanel);
         frame.addKeyListener(controller);
         frame.addMouseWheelListener(controller);
         frame.addMouseListener(controller);
-        frame.add(canvas, "Game");
-        frame.add(levelChooser, "LevelChooser");
-        showLevelChooser();
         frame.setResizable(false);
         frame.setVisible(true);
+
+        showMenu();
     }
+
     public void update() {
         canvas.repaint();
     }
 
     public void showWonDialog() {
-        JOptionPane.showMessageDialog(null, "Congratulations , you have successfully passed the level!!!");
+        JOptionPane.showMessageDialog(null, "Congratulations, you have successfully passed the level!!!");
     }
 
-    public void showCanvas(){
+    public void showCanvas() {
         update();
-        cardLayout.show(frame.getContentPane(), "Game");
+        cardLayout.show(mainPanel, "Game");
         canvas.requestFocusInWindow();
-
     }
-    public void showLevelChooser(){
-        cardLayout.show(frame.getContentPane(), "LevelChooser");
+
+    public void showLevelChooser() {
+        cardLayout.show(mainPanel, "LevelChooser");
+    }
+
+    public void showMenu() {
+        cardLayout.show(mainPanel, "Menu");
     }
 }
