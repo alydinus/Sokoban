@@ -165,7 +165,7 @@ public class Model {
     }
 
     public boolean getState() {
-        return true;
+        return stateDesktop;
     }
 
     public int[][] getDesktop() {

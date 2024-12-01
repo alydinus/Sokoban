@@ -9,7 +9,7 @@ public class Viewer {
         Model model = controller.getModel();
         canvas = new Canvas(model);
         JFrame frame = new JFrame("Sokoban Game MVC Pattern");
-        frame.setSize(900, 700);
+        frame.setSize(1200, 900);
         frame.setLocation(200, 100);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add("Center", canvas);

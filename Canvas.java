@@ -51,41 +51,43 @@ public class Canvas extends JPanel {
     public void paint(Graphics g) {
         super.paint(g);
         boolean stateGame = model.getState();
-        int start = 50;
-        int x = 50;
-        int y = 50;
-        int width = 50;
-        int height = 50;
-        int offset = 1;
-        int[][] desktop = model.getDesktop();
-
-        // 1 - Player
-        // 2 - Wall
-        // 3 - Box
-        // 4 - Target
         if (stateGame) {
-            for (int i = 0; i < desktop.length; i++) {
-                for (int j = 0; j < desktop[i].length; j++) {
-                    if (desktop[i][j] == 1) {
-                        g.drawImage(gamerDownImage, x, y, null);
-                    } else if (desktop[i][j] == 2) {
-                        g.drawImage(wallImage, x, y, null);
-                    } else if (desktop[i][j] == 3) {
-                        g.drawImage(boxImage, x, y, null);
-                    } else if (desktop[i][j] == 4) {
-                        g.drawImage(targetImage, x, y, null);
-                    }
-                    x = x + width + offset;
-                }
-                x = start;
-                y = y + height + offset;
-            }
+            drawDesktop(g);
         } else {
             drawError(g);
         }
     }
 
-    public void drawError(Graphics g) {
+    private void drawDesktop(Graphics g) {
+        int start = 300;
+        int x = start;
+        int y = 100;
+        int width = 50;
+        int height = 50;
+        int offset = 0;
+        int[][] desktop = model.getDesktop();
+        for (int i = 0; i < desktop.length; i++) {
+            for (int j = 0; j < desktop[i].length; j++) {
+                if (desktop[i][j] == 1) {
+                    g.drawImage(gamerDownImage, x, y, width, height, this);
+                } else if (desktop[i][j] == 2) {
+                    g.drawImage(wallImage, x, y, width, height, this);
 
+                } else if (desktop[i][j] == 3) {
+                    g.drawImage(boxImage, x, y, width, height, this);
+                } else if (desktop[i][j] == 4) {
+                    g.drawImage(targetImage, x, y, width, height, this);
+                } else if (desktop[i][j] == 0) {
+                    g.drawImage(groundImage, x, y, width, height, this);
+                }
+                x = x + width + offset;
+            }
+            x = start;
+            y = y + height + offset;
+        }
+    }
+
+    public void drawError(Graphics g) {
+        g.drawImage(errorImage, 300, 100, 200, 200, this);
     }
 }
