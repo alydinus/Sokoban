@@ -7,7 +7,7 @@ public class Model {
     private boolean stateDesktop;
     private Levels levels;
 
-    public Model(Viewer viewer){
+    public Model(Viewer viewer) {
         this.viewer = viewer;
         levels = new Levels();
         initialization();
@@ -22,21 +22,21 @@ public class Model {
         int countThree = 0;
         int countFour = 0;
 
-        for(int i = 0; i < desktop.length; i++) {
-            for(int j = 0; j < desktop[i].length; j++) {
-                if(desktop[i][j] == 1) {
+        for (int i = 0; i < desktop.length; i++) {
+            for (int j = 0; j < desktop[i].length; j++) {
+                if (desktop[i][j] == 1) {
                     countOne = countOne + 1;
                     indexX = i;
                     indexY = j;
-                } else if(desktop[i][j] == 3) {
+                } else if (desktop[i][j] == 3) {
                     countThree = countThree + 1;
-                } else if(desktop[i][j] == 4) {
+                } else if (desktop[i][j] == 4) {
                     countFour = countFour + 1;
                 }
             }
         }
 
-        if((countOne != 1) || (countThree == 0) || (countFour == 0) || (countThree != countFour)) {
+        if ((countOne != 1) || (countThree == 0) || (countFour == 0) || (countThree != countFour)) {
             stateDesktop = false;
             return;
         }
@@ -44,9 +44,9 @@ public class Model {
         arrayIndexes = new int[2][countFour];
 
         int a = 0;
-        for(int i = 0; i < desktop.length; i++) {
-            for(int j = 0; j < desktop[i].length; j++) {
-                if(desktop[i][j] == 4) {
+        for (int i = 0; i < desktop.length; i++) {
+            for (int j = 0; j < desktop[i].length; j++) {
+                if (desktop[i][j] == 4) {
                     arrayIndexes[0][a] = i;
                     arrayIndexes[1][a] = j;
                     a = a + 1;
@@ -55,8 +55,8 @@ public class Model {
         }
     }
 
-    public void move(String direction){
-        switch (direction){
+    public void move(String direction) {
+        switch (direction) {
             case "Left":
                 moveLeft();
                 break;
@@ -112,7 +112,7 @@ public class Model {
             }
         }
 
-        if(desktop[indexX][indexY - 1] == 0 || desktop[indexX][indexY - 1] == 4) {
+        if (desktop[indexX][indexY - 1] == 0 || desktop[indexX][indexY - 1] == 4) {
             desktop[indexX][indexY] = 0;
             indexY = indexY - 1;
             desktop[indexX][indexY] = 1;
@@ -127,7 +127,7 @@ public class Model {
             }
         }
 
-        if(desktop[indexX][indexY + 1] == 0 || desktop[indexX][indexY + 1] == 4) {
+        if (desktop[indexX][indexY + 1] == 0 || desktop[indexX][indexY + 1] == 4) {
             desktop[indexX][indexY] = 0;
             indexY = indexY + 1;
             desktop[indexX][indexY] = 1;
@@ -150,14 +150,14 @@ public class Model {
     }
 
     private void moveUp() {
-        if(desktop[indexX - 1][indexY] == 3) {
+        if (desktop[indexX - 1][indexY] == 3) {
             if (desktop[indexX - 2][indexY] == 0 || desktop[indexX - 2][indexY] == 4) {
                 desktop[indexX - 1][indexY] = 0;
                 desktop[indexX - 2][indexY] = 3;
             }
         }
 
-        if(desktop[indexX - 1][indexY] == 0 || desktop[indexX - 1][indexY] == 4) {
+        if (desktop[indexX - 1][indexY] == 0 || desktop[indexX - 1][indexY] == 4) {
             desktop[indexX][indexY] = 0;
             indexX = indexX - 1;
             desktop[indexX][indexY] = 1;
@@ -165,6 +165,10 @@ public class Model {
     }
 
     public boolean getState() {
-        return false;
+        return true;
+    }
+
+    public int[][] getDesktop() {
+        return desktop;
     }
 }
