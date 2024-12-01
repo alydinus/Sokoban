@@ -16,3 +16,4 @@ build/
 *.xml
 *.ipr
 *.iws
+.out

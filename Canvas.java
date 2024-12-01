@@ -3,6 +3,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -70,10 +71,9 @@ public class Canvas extends JPanel {
         for (int i = 0; i < desktop.length; i++) {
             for (int j = 0; j < desktop[i].length; j++) {
                 if (desktop[i][j] == 1) {
-                    g.drawImage(gamerDownImage, x, y, width, height, this);
+                    drawPlayer(model.getDirection(), g, x, y, width, height, this);
                 } else if (desktop[i][j] == 2) {
                     g.drawImage(wallImage, x, y, width, height, this);
-
                 } else if (desktop[i][j] == 3) {
                     g.drawImage(boxImage, x, y, width, height, this);
                 } else if (desktop[i][j] == 4) {
@@ -94,5 +94,22 @@ public class Canvas extends JPanel {
         g.setFont(font);
         g.setColor(Color.RED);
         g.drawString("Initialization Error!", 200, 100);
+    }
+
+    public void drawPlayer(String direction, Graphics g, int x, int y, int width, int height, ImageObserver observer) {
+        switch (direction){
+            case "Up":
+                g.drawImage(gamerUpImage, x, y, width, height, observer);
+                break;
+            case "Right":
+                g.drawImage(gamerRightImage, x, y, width, height, observer);
+                break;
+            case "Down":
+                g.drawImage(gamerDownImage, x, y, width, height, observer);
+                break;
+            case "Left":
+                g.drawImage(gamerLeftImage, x, y, width, height, observer);
+                break;
+        }
     }
 }
