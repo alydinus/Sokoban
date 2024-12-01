@@ -207,9 +207,6 @@ public class Levels {
     public int[][] getLevel(String command) {
         int[][] array = null;
         switch (command) {
-            case "Level 1":
-                array = getFirstLevel();
-                break;
             case "Level 2":
                 array = getSecondLevel();
                 break;

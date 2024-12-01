@@ -1,3 +1,4 @@
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -19,11 +20,12 @@ public class Canvas extends JPanel {
     private Image groundImage;
     private Image targetImage;
     private Image wallImage;
-
+    private Image backgroundImage;
     public Canvas(Model model, Controller controller) {
         this.model = model;
         Color backgroundColor = new Color(40, 44, 52);
         setBackground(backgroundColor);
+        File backgroundFile = new File("images/background.jpg");
         File boxFile = new File("images/box.png");
         File errorFile = new File("images/error.png");
         File gamerDownFile = new File("images/gamerDown.jpg");
@@ -44,6 +46,7 @@ public class Canvas extends JPanel {
             groundImage = ImageIO.read(groundFile);
             targetImage = ImageIO.read(targetFile);
             wallImage = ImageIO.read(wallFile);
+            backgroundImage = ImageIO.read(backgroundFile);
         } catch (IOException ioe) {
             System.out.println(ioe);
         }

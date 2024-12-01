@@ -170,7 +170,7 @@ public class Model {
     public boolean getState() {
         return stateDesktop;
     }
-    public void initialization(int[][] level) {
+    public void chooseLevel(int[][] level) {
         level = desktop;
         stateDesktop = true;
         int countOne = 0;
@@ -220,7 +220,7 @@ public class Model {
 
     public void startLevel(String command) {
         desktop = levels.getLevel(command);
-        initialization(desktop);
+        chooseLevel(desktop);
         viewer.showCanvas();
     }
 }

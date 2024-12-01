@@ -1,3 +1,4 @@
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.awt.CardLayout;
@@ -14,8 +15,8 @@ public class Viewer {
         cardLayout = new CardLayout();
         levelChooser = new LevelChooser(this, model);
         frame = new JFrame("Sokoban Game MVC Pattern");
-        frame.setSize(1200, 900);
-        frame.setLocation(200, 100);
+        frame.setSize(1200, 800);
+        frame.setLocation(170,20);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(cardLayout);
         frame.addKeyListener(controller);
