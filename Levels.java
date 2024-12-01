@@ -32,7 +32,9 @@ public class Levels {
             case 7:
                 array = getLevelFromFile("levels/level7.sok");
                 break;
-
+            case 8:
+                array = getLevelFromFile("levels/level8.sok");
+                break;
             default:
                 level = 1;
                 array = getFirstLevel();
@@ -62,7 +64,7 @@ public class Levels {
                 {2, 0, 0, 3, 0, 0, 0, 4, 0, 2},
                 {2, 0, 2, 2, 2, 0, 2, 2, 0, 2},
                 {2, 0, 0, 0, 0, 0, 0, 0, 4, 2},
-                {2, 0, 0, 1, 0, 3, 0, 0, 0, 2},
+                {2, 0, 3, 1, 0, 3, 0, 0, 0, 2},
                 {2, 0, 2, 2, 2, 0, 2, 2, 2, 2},
                 {2, 0, 0, 4, 0, 3, 0, 0, 0, 2},
                 {2, 0, 0, 0, 0, 0, 0, 4, 0, 2},
@@ -81,14 +83,15 @@ public class Levels {
     private int[][] getFourthLevel() {
         return new int[][]{
                 {2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
-                {2, 0, 3, 0, 0, 4, 0, 3, 0, 2},
-                {2, 0, 2, 2, 2, 0, 2, 2, 0, 2},
+                {2, 0, 2, 4, 0, 0, 2, 4, 0, 2},
+                {2, 0, 0, 2, 0, 3, 2, 0, 0, 2},
                 {2, 0, 0, 0, 0, 0, 0, 0, 0, 2},
-                {2, 4, 0, 3, 1, 3, 0, 4, 0, 2},
-                {2, 0, 0, 0, 0, 0, 0, 0, 0, 2},
-                {2, 0, 2, 2, 2, 0, 2, 2, 0, 2},
-                {2, 0, 3, 0, 0, 4, 0, 3, 0, 2},
-                {2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
+                {2, 0, 0, 1, 0, 0, 0, 0, 0, 2},
+                {2, 0, 2, 0, 0, 0, 3, 0, 0, 2},
+                {2, 0, 3, 0, 0, 2, 0, 0, 0, 2},
+                {2, 0, 0, 0, 2, 0, 0, 0, 0, 2},
+                {2, 0, 0, 0, 2, 4, 0, 0, 0, 2},
+                {2, 2, 2, 2, 2, 2, 2, 2, 2, 2}
         };
     }
 
@@ -199,5 +202,38 @@ public class Levels {
 
     public int getLevelNumber() {
         return level;
+    }
+
+    public int[][] getLevel(String command) {
+        int[][] array = null;
+        switch (command) {
+            case "Level 1":
+                array = getFirstLevel();
+                break;
+            case "Level 2":
+                array = getSecondLevel();
+                break;
+            case "Level 3":
+                array = getThirdLevel();
+                break;
+            case "Level 4":
+                array = getFourthLevel();
+                break;
+            case "Level 5":
+                array = getLevelFromFile("levels/level5.sok");
+                break;
+            case "Level 6":
+                array = getLevelFromFile("levels/level6.sok");
+                break;
+            case "Level 7":
+                array = getLevelFromFile("levels/level7.sok");
+                break;
+            case "Level 8":
+                array = getLevelFromFile("levels/level8.sok");
+                break;
+            default:
+                array = getFirstLevel();
+        }
+        return array;
     }
 }

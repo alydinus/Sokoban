@@ -106,7 +106,7 @@ public class Model {
 
     private void moveLeft() {
         if (desktop[indexX][indexY - 1] == 3) {
-            if (desktop[indexX][indexY - 2] == 0 || desktop[indexX - 2][indexY] == 4) {
+            if (desktop[indexX][indexY - 2] == 0 || desktop[indexX ][indexY - 2] == 4) {
                 desktop[indexX][indexY - 1] = 0;
                 desktop[indexX][indexY - 2] = 3;
             }
@@ -167,8 +167,54 @@ public class Model {
     public boolean getState() {
         return stateDesktop;
     }
+    public void initialization(int[][] level) {
+        level = desktop;
+        stateDesktop = true;
+        int countOne = 0;
+        int countThree = 0;
+        int countFour = 0;
+
+        for(int i = 0; i < desktop.length; i++) {
+            for(int j = 0; j < desktop[i].length; j++) {
+                if(desktop[i][j] == 1) {
+                    countOne = countOne + 1;
+                    indexX = i;
+                    indexY = j;
+                } else if(desktop[i][j] == 3) {
+                    countThree = countThree + 1;
+                } else if(desktop[i][j] == 4) {
+                    countFour = countFour + 1;
+                }
+            }
+        }
+
+        if((countOne != 1) || (countThree == 0) || (countFour == 0) || (countThree != countFour)) {
+            stateDesktop = false;
+            return;
+        }
+
+        arrayIndexes = new int[2][countFour];
+
+        int a = 0;
+        for(int i = 0; i < desktop.length; i++) {
+            for(int j = 0; j < desktop[i].length; j++) {
+                if(desktop[i][j] == 4) {
+                    arrayIndexes[0][a] = i;
+                    arrayIndexes[1][a] = j;
+                    a = a + 1;
+                }
+            }
+        }
+
+    }
 
     public int[][] getDesktop() {
         return desktop;
+    }
+
+    public void startLevel(String command) {
+        desktop = levels.getLevel(command);
+        initialization(desktop);
+        viewer.showCanvas();
     }
 }

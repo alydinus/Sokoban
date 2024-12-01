@@ -1,4 +1,5 @@
 import javax.swing.JPanel;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Image;
@@ -18,11 +19,10 @@ public class Canvas extends JPanel {
     private Image targetImage;
     private Image wallImage;
 
-    public Canvas(Model model) {
+    public Canvas(Model model, Controller controller) {
         this.model = model;
         Color backgroundColor = new Color(40, 44, 52);
         setBackground(backgroundColor);
-
         File boxFile = new File("images/box.png");
         File errorFile = new File("images/error.png");
         File gamerDownFile = new File("images/gamerDown.jpg");
@@ -46,6 +46,7 @@ public class Canvas extends JPanel {
         } catch (IOException ioe) {
             System.out.println(ioe);
         }
+        addKeyListener(controller);
     }
 
     public void paint(Graphics g) {
@@ -88,6 +89,10 @@ public class Canvas extends JPanel {
     }
 
     public void drawError(Graphics g) {
-        g.drawImage(errorImage, 300, 100, 200, 200, this);
+        Font font = new Font("Arial", Font.BOLD, 50);
+        g.drawImage(errorImage, 300, 170, null);
+        g.setFont(font);
+        g.setColor(Color.RED);
+        g.drawString("Initialization Error!", 200, 100);
     }
 }
