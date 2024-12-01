@@ -6,11 +6,13 @@ public class Model {
     private int[][] arrayIndexes;
     private boolean stateDesktop;
     private Levels levels;
+    private String direction;
 
     public Model(Viewer viewer) {
         this.viewer = viewer;
         levels = new Levels();
         initialization();
+        direction = "Down";
     }
 
     private void initialization() {
@@ -56,6 +58,7 @@ public class Model {
     }
 
     public void move(String direction) {
+        this.direction = direction;
         switch (direction) {
             case "Left":
                 moveLeft();
@@ -170,5 +173,8 @@ public class Model {
 
     public int[][] getDesktop() {
         return desktop;
+    }
+    public String getDirection() {
+        return direction;
     }
 }
