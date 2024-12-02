@@ -36,6 +36,12 @@ public class Controller implements KeyListener , MouseListener , MouseWheelListe
             case 39:
                 direction = "Right";
                 break;
+            case 90:
+                model.undoMove();
+                return;
+            case 89:
+                model.redoMove();
+                return;
             default:
                 return;
         }
@@ -58,6 +64,12 @@ public class Controller implements KeyListener , MouseListener , MouseWheelListe
     public void mouseReleased(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
+
+        if (isInsideRectangle(x, y, 50, 650, 150, 50)) {
+            model.undoMove();
+        } else if (isInsideRectangle(x, y, 250, 650, 150, 50)) {
+            model.redoMove();
+        }
     }
 
     public void mouseEntered(MouseEvent e) {
@@ -70,5 +82,8 @@ public class Controller implements KeyListener , MouseListener , MouseWheelListe
 
     public void mouseWheelMoved(MouseWheelEvent e) {
 
+    }
+    private boolean isInsideRectangle(int x, int y, int rectX, int rectY, int rectWidth, int rectHeight) {
+        return x >= rectX && x <= rectX + rectWidth && y >= rectY && y <= rectY + rectHeight;
     }
 }

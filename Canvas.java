@@ -3,6 +3,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.FontMetrics;
 import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
@@ -50,6 +51,7 @@ public class Canvas extends JPanel {
             System.out.println(ioe);
         }
         addKeyListener(controller);
+        addMouseListener(controller);
     }
 
     public void paint(Graphics g) {
@@ -60,6 +62,8 @@ public class Canvas extends JPanel {
         } else {
             drawError(g);
         }
+        drawButton(g, 50, 650, 160, 50, "Move backward");
+        drawButton(g, 260, 650, 150, 50, "Move forward");
     }
 
     private void drawDesktop(Graphics g) {
@@ -114,4 +118,18 @@ public class Canvas extends JPanel {
                 break;
         }
     }
+    private void drawButton(Graphics g, int x, int y, int width, int height, String text) {
+        g.setColor(new Color(70, 130, 180));
+        g.fillRect(x, y, width, height);
+
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Arial", Font.BOLD, 20));
+        FontMetrics font = g.getFontMetrics();
+        int textWidth = font.stringWidth(text);
+        int textHeight = font.getHeight();
+        int textX = x + (width - textWidth) / 2;
+        int textY = y + (height + textHeight / 2) / 2;
+        g.drawString(text, textX, textY);
+    }
+
 }

@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 public class Model {
     private Viewer viewer;
     private int[][] desktop;
@@ -7,12 +9,16 @@ public class Model {
     private boolean stateDesktop;
     private Levels levels;
     private String direction;
+    private Stack<int[][]> undoStack;
+    private Stack<int[][]> redoStack;
 
     public Model(Viewer viewer) {
         this.viewer = viewer;
         levels = new Levels();
         initialization();
         direction = "Down";
+        undoStack = new Stack<>();
+        redoStack = new Stack<>();
     }
 
     private void initialization() {
@@ -58,6 +64,7 @@ public class Model {
     }
 
     public void move(String direction) {
+        saveState();
         this.direction = direction;
         switch (direction) {
             case "Left":
@@ -222,5 +229,53 @@ public class Model {
         desktop = levels.getLevel(command);
         chooseLevel(desktop);
         viewer.showCanvas();
+    }
+    public void undoMove() {
+        if (0 < undoStack.size()) {
+            redoStack.push(copyField(desktop));
+            desktop = undoStack.pop();
+            updatePlayerPosition();
+        }
+    }
+
+    public void redoMove() {
+        if (0 < redoStack.size()) {
+            undoStack.push(copyField(desktop));
+            desktop = redoStack.pop();
+            updatePlayerPosition();
+        }
+    }
+
+    private void saveState() {
+        if (50 <= undoStack.size()) {
+            undoStack.remove(0);
+        }
+        undoStack.push(copyField(desktop));
+        redoStack.clear();
+    }
+
+    private int[][] copyField(int[][] field) {
+        int[][] copy = new int[field.length][];
+        for (int i = 0; i < field.length; i++) {
+            copy[i] = new int[field[i].length];
+            for (int j = 0; j < field[i].length; j++) {
+                copy[i][j] = field[i][j];
+            }
+        }
+        return copy;
+    }
+
+    private void updatePlayerPosition() {
+        for (int i = 0; i < desktop.length; i++) {
+            for (int j = 0; j < desktop[i].length; j++) {
+                if (desktop[i][j] == 1) {
+                    indexX = i;
+                    indexY = j;
+                    break;
+                }
+            }
+        }
+
+        viewer.update();
     }
 }
