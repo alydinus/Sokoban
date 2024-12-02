@@ -1,4 +1,3 @@
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -25,13 +24,13 @@ public class Canvas extends JPanel {
         this.model = model;
         Color backgroundColor = new Color(40, 44, 52);
         setBackground(backgroundColor);
-        File backgroundFile = new File("images/background.jpg");
+        File backgroundFile = new File(1"images/background.jpg");
         File boxFile = new File("images/box.png");
         File errorFile = new File("images/error.png");
-        File gamerDownFile = new File("images/gamerDown.jpg");
-        File gamerLeftFile = new File("images/gamerLeft.jpg");
-        File gamerRightFile = new File("images/gamerRight.jpg");
-        File gamerUpFile = new File("images/gamerUp.jpg");
+        File gamerDownFile = new File("images/front-player.jpg");
+        File gamerLeftFile = new File("images/left-side-player.jpg");
+        File gamerRightFile = new File("images/right-side-player.jpg");
+        File gamerUpFile = new File("images/back-player.jpg");
         File groundFile = new File("images/ground.png");
         File targetFile = new File("images/target.png");
         File wallFile = new File("images/wall.png");

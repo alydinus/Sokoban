@@ -5,6 +5,9 @@ import java.awt.Font;
 
 
 public class SettingsPanel extends JPanel {
+    private Viewer viewer;
+    private SettingsController settingsController;
+
     public SettingsPanel() {
         setLayout(new BorderLayout());
 
