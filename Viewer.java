@@ -11,12 +11,14 @@ public class Viewer {
     private LevelChooser levelChooser;
     private JFrame frame;
     private JPanel mainPanel;
+    private OptionPanel optionPanel;
 
     public Viewer() {
 
         Controller controller = new Controller(this);
         Model model = controller.getModel();
 
+        optionPanel = new OptionPanel(model);
         canvas = new Canvas(model, controller);
         cardLayout = new CardLayout();
         levelChooser = new LevelChooser(this, model);
@@ -28,11 +30,14 @@ public class Viewer {
         mainPanel.add(menuPanel, "Menu");
         mainPanel.add(levelChooser, "LevelChooser");
         mainPanel.add(canvas, "Game");
+
+        canvas.add(optionPanel);
+
         Image backgroundImage = new ImageIcon("images/background.jpg").getImage();
 
         frame = new JFrame("Sokoban Game MVC Pattern");
         frame.setSize(1200, 800);
-        frame.setLocation(170, 20);
+        frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(mainPanel);
         frame.addKeyListener(controller);
@@ -64,5 +69,11 @@ public class Viewer {
 
     public void showMenu() {
         cardLayout.show(mainPanel, "Menu");
+    }
+    public OptionPanel getOptionPanel() {
+        return optionPanel;
+    }
+    public void setOptionPanel(OptionPanel optionPanel) {
+        this.optionPanel = optionPanel;
     }
 }

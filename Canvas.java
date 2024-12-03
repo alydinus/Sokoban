@@ -25,6 +25,7 @@ public class Canvas extends JPanel {
         this.model = model;
         Color backgroundColor = new Color(40, 44, 52);
         setBackground(backgroundColor);
+        setLayout(null);
         File backgroundFile = new File("images/background.jpg");
         File boxFile = new File("images/box.png");
         File errorFile = new File("images/error.png");

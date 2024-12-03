@@ -11,7 +11,8 @@ public class Model {
     private String direction;
     private Stack<int[][]> undoStack;
     private Stack<int[][]> redoStack;
-
+    private OptionPanel optionPanel;
+    private int steps;
     public Model(Viewer viewer) {
         this.viewer = viewer;
         levels = new Levels();
@@ -19,6 +20,11 @@ public class Model {
         direction = "Down";
         undoStack = new Stack<>();
         redoStack = new Stack<>();
+        optionPanel = viewer.getOptionPanel();
+        if (optionPanel == null) {
+            optionPanel = new OptionPanel(this);
+            viewer.setOptionPanel(optionPanel);
+        }
     }
 
     private void initialization() {
@@ -82,6 +88,8 @@ public class Model {
             default:
                 break;
         }
+        steps++;
+        optionPanel.countSteps();
         checkGoal();
         viewer.update();
         won();
@@ -235,6 +243,7 @@ public class Model {
             redoStack.push(copyField(desktop));
             desktop = undoStack.pop();
             updatePlayerPosition();
+            steps--;
         }
     }
 
@@ -243,6 +252,7 @@ public class Model {
             undoStack.push(copyField(desktop));
             desktop = redoStack.pop();
             updatePlayerPosition();
+            steps++;
         }
     }
 
@@ -277,5 +287,8 @@ public class Model {
         }
 
         viewer.update();
+    }
+    public int getSteps(){
+        return steps;
     }
 }

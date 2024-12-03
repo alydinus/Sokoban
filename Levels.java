@@ -233,4 +233,15 @@ public class Levels {
         }
         return array;
     }
+
+    public int getFirstRowElementsQuantity(String levelName) {
+        int[][] level = getLevel(levelName);
+        int count = 0;
+        for (int i = 0; i < 1; i++) {
+            for (int j = 0; j < level[i].length; j++) {
+                count++;
+            }
+        }
+        return count;
+    }
 }

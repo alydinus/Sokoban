@@ -1,3 +1,4 @@
+import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseListener;
@@ -7,10 +8,12 @@ import java.awt.event.MouseEvent;
 public class LevelChooserController implements ActionListener , MouseListener {
     private Model model;
     private Viewer viewer;
-
+    private OptionPanel optionPanel;
     public LevelChooserController(Viewer viewer, Model model) {
         this.model = model;
         this.viewer = viewer;
+        optionPanel = viewer.getOptionPanel();
+
     }
     public void actionPerformed(ActionEvent event) {
         String command = event.getActionCommand();
@@ -62,6 +65,7 @@ public class LevelChooserController implements ActionListener , MouseListener {
         }else if (isInsideRectangle(x, y, 740, 360, 150, 130)) {
             selectLevel(8);
         }
+        optionPanel.startTimer();
     }
 
     private boolean isInsideRectangle(int x, int y, int rectX, int rectY, int rectWidth, int rectHeight) {
